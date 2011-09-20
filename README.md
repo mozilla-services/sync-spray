@@ -1,5 +1,2 @@
-This is the sync-spray add-on.  It contains:
-
-* A program (lib/main.js).
-* A few tests.
-* Some meager documentation.
+sync-spray is an add-on for Firefox that generates "random" data and
+effectively stress tests the Sync component.
