@@ -47,20 +47,27 @@
   <meta name="robots" content="noindex"/>
   <style type="text/css">
     footer { font-size: 70% }
-/*
-# Bug 575675: Need to have an a:visited rule in a chrome document.
-*/
     a:visited { color: purple; }
   </style>
 </head>
 
 <body>
-<h1>Sync Spray</h1>
+  <h1>Sync Spray</h1>
 
-<script type="application/javascript;version=1.8"><![CDATA[
-  
-  
-]]></script>
+  <p>Use this page to simulate browser activity. This will spray Sync with
+     events. This in turn can be thought of as a load test for the browser
+     and Sync.</p>
+
+  <p><strong>This page will disrupt your existing browser session and profile
+     state! You should probably only consider using with a profile you don't
+     care about!</strong></p>
+
+  <h2>Start Browsing Simulation</h2>
+
+  <p>Enter a URL in the box below to begin browsing. This will open new tabs
+     and mess with your bookmarks.</p>
+     <input id="browseURL" size="30" value="http://www.yahoo.com/" /><br />
+     <button id="browseStart" type="button">Start Browsing</button>
 
 </body>
 </html>
