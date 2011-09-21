@@ -34,9 +34,29 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-function startBrowsing() {
-  let url = document.getElementById("browseURL").value;
-  self.port.emit("startBrowsing", url);
+// This script is executed whenever a new table is loaded and ready for
+// execution.
+
+let anchors = document.getElementsByTagName("a");
+let filtered = [];
+
+for (let i = 0; i < anchors.length; i++) {
+  let anchor = anchors[i];
+  let href = anchor.getAttribute("href");
+
+  if (href) filtered.push(anchor);
 }
 
-document.getElementById("browseStart").onclick = startBrowsing;
+// select a random link
+let i = Math.floor(Math.random() * (filtered.length));
+if (i == filtered.length) i = 0;
+
+let anchor = filtered[i];
+
+console.log("Anchor: " + anchor);
+
+// TODO this seems to open in a new tab, not in current window
+let ev = anchor.ownerDocument.createEvent("MouseEvents");
+ev.initMouseEvent("click",true,false,anchor.ownerDocument.defaultView,null,0,0,0,0,false,false,false,false,1,null);
+anchor.dispatchEvent(ev);
+
