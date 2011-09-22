@@ -34,7 +34,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// This script is executed whenever a new table is loaded and ready for
+// This script is executed whenever a new tab is loaded and ready for
 // execution.
 
 let anchors = document.getElementsByTagName("a");
@@ -44,19 +44,47 @@ for (let i = 0; i < anchors.length; i++) {
   let anchor = anchors[i];
   let href = anchor.getAttribute("href");
 
-  if (href) filtered.push(anchor);
+  if (!href) continue;
+
+  if (href.substr(0, 4) == 'http') filtered.push(anchor);
 }
 
-// select a random link
-let i = Math.floor(Math.random() * (filtered.length));
-if (i == filtered.length) i = 0;
+if (!filtered.length) {
+  window.history.back();
+} else {
 
-let anchor = filtered[i];
+  let tries = 0;
 
-console.log("Anchor: " + anchor);
+  while(true) {
+    // prevent infinite loops going to the same page
+    if (tries >= 10) {
+      window.history.back();
+      break;
+    }
+
+    tries++;
+
+    // select a random link
+    let i = Math.floor(Math.random() * (filtered.length));
+    if (i == filtered.length) i = 0;
+
+    let anchor = filtered[i];
+
+    if (anchor == window.location.href) {
+      continue;
+    }
+
+    console.log("Anchor: " + anchor);
+
+    window.location.href = anchor;
+    break;
+  }
+}
 
 // TODO this seems to open in a new tab, not in current window
-let ev = anchor.ownerDocument.createEvent("MouseEvents");
+/*let ev = anchor.ownerDocument.createEvent("MouseEvents");
 ev.initMouseEvent("click",true,false,anchor.ownerDocument.defaultView,null,0,0,0,0,false,false,false,false,1,null);
 anchor.dispatchEvent(ev);
+*/
+
 
